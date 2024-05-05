@@ -1,18 +1,28 @@
+import { Link } from "react-router-dom";
+
 export function Header(){
 
 
-    return (
-        <>
-          <div>
-            <ul className="flex justify-center ">
-                <li className="p-2"><button id="btnHome" className="p-2 border border-black">Home</button></li>
-                <li className="p-2"><button id="btnPokemons" className="p-2 border border-black">Pokemons Memory</button></li>
-                <li className="p-2"><button id="btnMarvel" className="p-2 border border-black">Marvel Memory</button></li>
-                <li className="p-2"><button id="btnAcerca" className="p-2 border border-black">A cerca de</button></li>
-            </ul>
-            <h1>MEMORY</h1>
-          </div>
+  return (
+      <>
+        <div>
+          <ul className="flex justify-center ">
+              <li className="p-2 m-2 border border-black justify-center align-middle">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="p-2 m-2 border border-black justify-center align-middle">
+                <Link to="/juego">Pokemons memory</Link>
+              </li>
+              <li className="p-2 m-2 border border-black justify-center align-middle">
+                <Link to="/marvel">Marvel memory</Link>
+              </li>
+              <li className="p-2 m-2 border border-black justify-center align-middle">
+                <Link to="/about">A cerca de</Link>
+              </li>
+          </ul>
+          <h1 className="flex justify-center">MEMORY</h1>
+        </div>
 
-        </>
-    )
+      </>
+  )
 }

@@ -8,6 +8,11 @@ export const ContextoGlobal = createContext()
 export function ContextoGlobalProvider({ children }){
 
     const [contadorGlobal, setContadorGlobal] = useState(0);
+    const [puntuacion, setPuntuacion] = useState(0);
+    const [compararPersonajes, setCompararPersonajes] = useState([]);
+    const [base, setBase] = useState([]);
+    const [tiempo, setTiempo] = useState(20);
+    const [juego, setJuego] = useState(false)
 
     const incrementarContadorGlobal = () => {
       setContadorGlobal(contadorGlobal + 1);
@@ -16,7 +21,13 @@ export function ContextoGlobalProvider({ children }){
 
     return(
         <ContextoGlobal.Provider value={{
-            contadorGlobal, setContadorGlobal, incrementarContadorGlobal
+            contadorGlobal, setContadorGlobal, incrementarContadorGlobal,
+            puntuacion, setPuntuacion,
+            compararPersonajes, setCompararPersonajes,
+            tiempo, setTiempo,
+            base, setBase,
+            juego, setJuego
+
         }}>
             {children}
         </ContextoGlobal.Provider>
