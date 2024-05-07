@@ -48,10 +48,10 @@ export function Juego() {
 
     return (
         <>
-            <div className='flex justify-center flex-col items-center'>
-                <h2>Contador Global de Clics: {contadorGlobal}</h2>
-                <h2>Tiempo Restante: {tiempo}</h2>
-                <h2>Puntuación: {puntuacion}</h2>
+            <div className='flex justify-center items-center py-4 px-6 '>
+                <h2 className="bg-white mr-4 p-2 text-yellow-600 font-bold">Contador Global de Clics: {contadorGlobal}</h2>
+                <h2 className="bg-white mr-4 p-2 text-yellow-600 font-bold">Tiempo Restante: {tiempo}</h2>
+                <h2 className="bg-white p-2 text-yellow-600 font-bold">Puntuación: {puntuacion}</h2>
             </div>
             <GrupoTarjetas />
         </>

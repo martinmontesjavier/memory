@@ -1,30 +1,35 @@
 import React, { useContext, useState, useEffect } from "react";
 import { ContextoGlobal } from "../context/ContextoGlobal.jsx";
+import { Formulario } from "./Formulario.jsx";
 
 export function Tarjeta({ id, imagen, nombre }) {
     const { incrementarContadorGlobal, base, setBase, compararPersonajes, setCompararPersonajes, tiempo, setTiempo, puntuacion, setPuntuacion, juego, setJuego } = useContext(ContextoGlobal);
     const [contador, setContador] = useState(0);
     const [volteada, setVolteada] = useState(false); // Estado inicial de volteada
+    const [parejasEncontradas, setParejasEncontradas] = useState([]); // Registro de IDs de parejas encontradas
 
     useEffect(() => {
         let temporizador;
         if (compararPersonajes.length === 2) {
             if (compararPersonajes[0] === compararPersonajes[1]) {
-                console.log('¡Son iguales!');
+                // console.log('¡Son iguales!');
                 const idIgual = compararPersonajes[0];
-                const baseActualizada = base.map(pokemon => {
-                    if (pokemon.id === idIgual) {
-                        return { ...pokemon, volteada: true };
-                    }
-                    return pokemon;
-                });
-                console.log("Base actualizada:", baseActualizada);
-                setBase(baseActualizada);
+                // const baseActualizada = base.map(pokemon => {
+                //     if (pokemon.id === idIgual) {
+                //         return { ...pokemon, volteada: true };
+                //     }
+                //     return pokemon;
+                // });
+                // // console.log("Base actualizada:", baseActualizada);
+                // setBase(baseActualizada);
+                setParejasEncontradas([...parejasEncontradas, idIgual]);
                 setCompararPersonajes([]);
             } else {
                 temporizador = setTimeout(() => {
                     setCompararPersonajes([]);
-                    setVolteada(false); // Restablecer el estado de la tarjeta
+                    if (!parejasEncontradas.includes(id)) {
+                        setVolteada(false); // Restablecer el estado de la tarjeta solo si el ID no está en parejasEncontradas
+                    }
                 }, 1000);
             }
         }
@@ -38,7 +43,7 @@ export function Tarjeta({ id, imagen, nombre }) {
             }, 1000);
         
             // Detener el intervalo cuando el tiempo llega a cero
-            if (tiempo === 0) {
+            if (tiempo === 0 || parejasEncontradas.length == 9) {
                 clearInterval(intervalo);
                 setJuego(false);
                 console.log("Se acabó el tiempo");
@@ -63,7 +68,7 @@ export function Tarjeta({ id, imagen, nombre }) {
 
     if(volteada == true){
         return(
-            <div className="tarjeta bg-fuchsia-400">
+            <div className="tarjeta bg-sky-400">
                 <div onClick={handleClick} id={id} className="min-h-[400px] max-w-sm rounded overflow-hidden shadow-lg">
                     <img className="w-[300px] h-[290px]" src={imagen} alt={nombre}/>
                     <div className="px-6 py-4">
@@ -77,7 +82,7 @@ export function Tarjeta({ id, imagen, nombre }) {
         )
     }else{
         return(
-            <div className="tarjeta bg-fuchsia-400 hover:cursor-pointer">
+            <div className="tarjeta bg-sky-400 hover:cursor-pointer">
                 <div onClick={handleClick} id={id} className="min-h-[400px] max-w-sm rounded overflow-hidden shadow-lg">
                     <img className="w-[300px] h-[400px]" src="https://tcg.pokemon.com/assets/img/global/tcg-card-back.jpg" alt="Dorso"/>
                 </div>

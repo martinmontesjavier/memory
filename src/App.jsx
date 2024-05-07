@@ -13,8 +13,8 @@ function App() {
     <>
     <ContextoGlobalProvider>
       <Router>
+        <Header className="container-fluid"></Header>
         <div className="container mx-auto">
-        <Header></Header>
         <Routes>
               <Route path="/" element={<Home/>}></Route>
               <Route path="/about" element={<AcercaDe/>}></Route>
