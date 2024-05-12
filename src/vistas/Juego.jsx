@@ -1,9 +1,10 @@
 import { useContext, useEffect } from 'react';
 import { GrupoTarjetas } from "../componentes/GrupoTarjetas.jsx";
 import { ContextoGlobal } from "../context/ContextoGlobal.jsx";
+import { Formulario } from '../componentes/Formulario.jsx';
 
 export function Juego() {
-    const { contadorGlobal, setBase, tiempo, puntuacion } = useContext(ContextoGlobal);
+    const { contadorGlobal, setBase, tiempo, puntuacion, parejasEncontradas, setParejasEncontradas, juego } = useContext(ContextoGlobal);
 
     useEffect(() => {
         async function obtenerPokemons() {
@@ -21,7 +22,7 @@ export function Juego() {
                     };
                 } catch (error) {
                     console.log('Ha ocurrido un error', error);
-                    throw error; // Propagate the error
+                    throw error; 
                 }
             });
 
@@ -44,7 +45,11 @@ export function Juego() {
         obtenerPokemons();
     }, [setBase]); // Se ejecuta solo cuando setBase cambia
 
-    
+    if (!juego) {
+        if (tiempo === 0 || parejasEncontradas.length === 9) {
+            return <Formulario />;
+        }
+    }
 
     return (
         <>

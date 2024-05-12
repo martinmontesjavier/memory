@@ -3,10 +3,17 @@ import { ContextoGlobal } from "../context/ContextoGlobal.jsx";
 import { Formulario } from "./Formulario.jsx";
 
 export function Tarjeta({ id, imagen, nombre }) {
-    const { incrementarContadorGlobal, base, setBase, compararPersonajes, setCompararPersonajes, tiempo, setTiempo, puntuacion, setPuntuacion, juego, setJuego } = useContext(ContextoGlobal);
+    const { 
+        incrementarContadorGlobal, 
+        base, setBase, 
+        compararPersonajes, setCompararPersonajes, 
+        tiempo, setTiempo, 
+        puntuacion, setPuntuacion, 
+        juego, setJuego,
+        parejasEncontradas, setParejasEncontradas } = useContext(ContextoGlobal);
+        
     const [contador, setContador] = useState(0);
     const [volteada, setVolteada] = useState(false); // Estado inicial de volteada
-    const [parejasEncontradas, setParejasEncontradas] = useState([]); // Registro de IDs de parejas encontradas
 
     useEffect(() => {
         let temporizador;
@@ -23,6 +30,7 @@ export function Tarjeta({ id, imagen, nombre }) {
                 // // console.log("Base actualizada:", baseActualizada);
                 // setBase(baseActualizada);
                 setParejasEncontradas([...parejasEncontradas, idIgual]);
+                setPuntuacion(puntuacion + 100);
                 setCompararPersonajes([]);
             } else {
                 temporizador = setTimeout(() => {
@@ -47,6 +55,7 @@ export function Tarjeta({ id, imagen, nombre }) {
                 clearInterval(intervalo);
                 setJuego(false);
                 console.log("Se acabó el tiempo");
+                
             }
         
             // Limpiar el intervalo cuando el componente se desmonte o se actualice
@@ -54,11 +63,11 @@ export function Tarjeta({ id, imagen, nombre }) {
         }
     }, [juego, tiempo, setTiempo, setJuego]);
 
+
     const handleClick = () => {
         if (!volteada && compararPersonajes.length < 2) {
             incrementarContadorGlobal();
             setContador(contador + 1);
-            setPuntuacion(puntuacion + 10);
             setVolteada(true); // Voltear la tarjeta solo si no está volteada
             setCompararPersonajes([...compararPersonajes, id]);
             // Aquí actualizamos el estado del juego

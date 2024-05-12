@@ -4,8 +4,10 @@ import { ContextoGlobal, ContextoGlobalProvider } from './context/ContextoGlobal
 import './index.css'
 import { Juego } from './vistas/Juego'
 import { Home } from "./vistas/Home"
-import { AcercaDe } from "./vistas/AcercaDe"
+import { Ranking } from "./vistas/Ranking"
 import { Marvel } from "./vistas/Marvel"
+import { Login } from "./vistas/Login"
+import { Registro } from "./vistas/Registro"
 
 function App() {
 
@@ -17,9 +19,11 @@ function App() {
         <div className="container mx-auto">
         <Routes>
               <Route path="/" element={<Home/>}></Route>
-              <Route path="/about" element={<AcercaDe/>}></Route>
+              <Route path="/ranking" element={<Ranking/>}></Route>
               <Route path="/juego" element={<Juego/>}></Route>
-              <Route path="/marvel" element={<Marvel/>}></Route>
+              {/* <Route path="/marvel" element={<Marvel/>}></Route> */}
+              <Route path="/login" element={<Login/>}></Route>
+              <Route path="/registro" element={<Registro/>}></Route>
         </Routes>
       </div>
       </Router>
