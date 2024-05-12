@@ -15,7 +15,7 @@ export function Header() {
             await supabase.auth.signOut(); // Cerrar la sesión
             setUsuario({}); 
             navigate('/login'); // Redireccionar al usuario después del cierre de sesión
-            console.log(usuario.email)
+            //console.log(usuario.email)
         } catch (error) {
             console.error('Error al cerrar sesión:', error.message);
         }
@@ -41,9 +41,9 @@ export function Header() {
                         <li className="p-2 m-2 border border-black justify-center align-middle bg-black">
                             <Link to="/" className="text-yellow-500">Home</Link>
                         </li>
-                        <li className="p-2 m-2 border border-black justify-center align-middle bg-black">
+                        {/* <li className="p-2 m-2 border border-black justify-center align-middle bg-black">
                             <Link to="/juego" className="text-yellow-500">Pokemons memory</Link>
-                        </li>
+                        </li> */}
                         {/* <li className="p-2 m-2 border border-black justify-center align-middle bg-black">
                             <Link to="/marvel" className="text-yellow-500">Marvel memory</Link>
                         </li> */}
